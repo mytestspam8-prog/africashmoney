@@ -10,20 +10,19 @@
     <meta name="theme-color" content="#667eea">
 
 ```
-<!-- Open Graph pour partage sur réseaux sociaux -->
 <meta property="og:title" content="AfriCash - Gagnez de l'argent facilement">
 <meta property="og:description" content="Plateforme pour gagner de l'argent en ligne">
 <meta property="og:type" content="website">
 
 <title>AfriCash - Gagnez de l'argent en ligne</title>
 
-<!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
 
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9207683457415697"
+     crossorigin="anonymous"></script>
+
 <style>
-    /* ================================
-       RESET & BASE STYLES
-       ================================ */
     * {
         margin: 0;
         padding: 0;
@@ -31,7 +30,6 @@
     }
 
     :root {
-        /* Couleurs principales */
         --primary-color: #667eea;
         --secondary-color: #764ba2;
         --accent-color: #FFE4B5;
@@ -40,26 +38,18 @@
         --success-color: #2ecc71;
         --error-color: #e74c3c;
         --warning-color: #f39c12;
-        
-        /* Espacement */
         --spacing-xs: 5px;
         --spacing-sm: 10px;
         --spacing-md: 15px;
         --spacing-lg: 20px;
         --spacing-xl: 30px;
-        
-        /* Border radius */
         --radius-sm: 10px;
         --radius-md: 15px;
         --radius-lg: 20px;
         --radius-full: 50%;
-        
-        /* Transitions */
         --transition-fast: 0.2s ease;
         --transition-normal: 0.3s ease;
         --transition-slow: 0.5s ease;
-        
-        /* Ombres */
         --shadow-sm: 0 2px 5px rgba(0,0,0,0.1);
         --shadow-md: 0 4px 10px rgba(0,0,0,0.15);
         --shadow-lg: 0 8px 20px rgba(0,0,0,0.2);
@@ -75,76 +65,16 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ================================
-       ANIMATIONS
-       ================================ */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+    @keyframes celebrate { 0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; } 50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); opacity: 0; } }
+    @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    @keyframes slideUp {
-        from { 
-            transform: translateY(50px); 
-            opacity: 0; 
-        }
-        to { 
-            transform: translateY(0); 
-            opacity: 1; 
-        }
-    }
-
-    @keyframes slideDown {
-        from { 
-            transform: translateY(-50px); 
-            opacity: 0; 
-        }
-        to { 
-            transform: translateY(0); 
-            opacity: 1; 
-        }
-    }
-
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-10px); }
-        75% { transform: translateX(10px); }
-    }
-
-    @keyframes celebrate {
-        0% {
-            transform: translate(-50%, -50%) scale(0) rotate(0deg);
-            opacity: 0;
-        }
-        50% {
-            transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
-            opacity: 1;
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1) rotate(360deg);
-            opacity: 0;
-        }
-    }
-
-    @keyframes shimmer {
-        0% { background-position: -1000px 0; }
-        100% { background-position: 1000px 0; }
-    }
-
-    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-        40% { transform: translateY(-20px); }
-        60% { transform: translateY(-10px); }
-    }
-
-    /* ================================
-       LOADING SCREEN
-       ================================ */
     .loading {
         position: fixed;
         top: 0;
@@ -169,10 +99,6 @@
         animation: spin 1s linear infinite;
     }
 
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-
     .loading-text {
         color: var(--light-color);
         font-size: 18px;
@@ -180,9 +106,6 @@
         animation: pulse 1.5s ease-in-out infinite;
     }
 
-    /* ================================
-       HEADER
-       ================================ */
     .header {
         background: var(--dark-color);
         color: var(--light-color);
@@ -259,9 +182,7 @@
         transition: transform var(--transition-fast);
     }
 
-    .menu-icon:hover {
-        transform: scale(1.1);
-    }
+    .menu-icon:hover { transform: scale(1.1); }
 
     .menu-icon span {
         width: 100%;
@@ -271,17 +192,9 @@
         transition: all var(--transition-fast);
     }
 
-    .menu-icon:hover span:nth-child(1) {
-        transform: translateY(-2px);
-    }
+    .menu-icon:hover span:nth-child(1) { transform: translateY(-2px); }
+    .menu-icon:hover span:nth-child(3) { transform: translateY(2px); }
 
-    .menu-icon:hover span:nth-child(3) {
-        transform: translateY(2px);
-    }
-
-    /* ================================
-       DASHBOARD
-       ================================ */
     .dashboard {
         max-width: 500px;
         margin: var(--spacing-lg) auto;
@@ -323,12 +236,7 @@
         left: -50%;
         width: 200%;
         height: 200%;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,0.3),
-            transparent
-        );
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
         animation: shimmer 3s infinite;
     }
 
@@ -355,9 +263,6 @@
         opacity: 0.9;
     }
 
-    /* ================================
-       ACTION BUTTONS
-       ================================ */
     .action-buttons {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -386,9 +291,7 @@
         box-shadow: var(--shadow-md);
     }
 
-    .action-btn:active {
-        transform: translateY(-2px);
-    }
+    .action-btn:active { transform: translateY(-2px); }
 
     .action-btn-icon {
         font-size: 30px;
@@ -407,9 +310,6 @@
         font-size: 14px;
     }
 
-    /* ================================
-       GAME GRID
-       ================================ */
     .game-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -469,9 +369,6 @@
         z-index: 1;
     }
 
-    /* ================================
-       FLUX/MODAL
-       ================================ */
     .flux-overlay {
         display: none;
         position: fixed;
@@ -487,9 +384,7 @@
         animation: fadeIn var(--transition-normal);
     }
 
-    .flux-overlay.active {
-        display: flex;
-    }
+    .flux-overlay.active { display: flex; }
 
     .flux-content {
         background: var(--light-color);
@@ -552,9 +447,6 @@
         box-shadow: var(--shadow-sm);
     }
 
-    /* ================================
-       FORMS
-       ================================ */
     .form-group {
         margin-bottom: var(--spacing-md);
         animation: slideUp var(--transition-normal);
@@ -614,18 +506,9 @@
         box-shadow: var(--shadow-md);
     }
 
-    .submit-btn:active {
-        transform: translateY(0);
-    }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    .submit-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    /* ================================
-       CELEBRATION EFFECT
-       ================================ */
     .celebration {
         position: fixed;
         top: 50%;
@@ -637,9 +520,6 @@
         filter: drop-shadow(0 0 10px rgba(255,215,0,0.8));
     }
 
-    /* ================================
-       MENU SIDEBAR
-       ================================ */
     .menu-sidebar {
         position: fixed;
         top: 0;
@@ -653,9 +533,7 @@
         overflow-y: auto;
     }
 
-    .menu-sidebar.active {
-        right: 0;
-    }
+    .menu-sidebar.active { right: 0; }
 
     .menu-header {
         background: var(--primary-color);
@@ -677,9 +555,6 @@
         padding-left: 25px;
     }
 
-    /* ================================
-       UTILITY CLASSES
-       ================================ */
     .info-box {
         background: #fff3cd;
         border: 1px solid #ffc107;
@@ -719,9 +594,7 @@
         transition: color var(--transition-fast);
     }
 
-    .toggle-link:hover {
-        color: var(--secondary-color);
-    }
+    .toggle-link:hover { color: var(--secondary-color); }
 
     .validation-message {
         font-size: 12px;
@@ -735,26 +608,12 @@
         animation: slideUp var(--transition-fast);
     }
 
-    /* ================================
-       RESPONSIVE
-       ================================ */
     @media (max-width: 768px) {
-        .dashboard {
-            padding: var(--spacing-sm);
-        }
-        
-        .action-buttons {
-            gap: var(--spacing-sm);
-        }
-        
-        .game-grid {
-            gap: var(--spacing-sm);
-        }
+        .dashboard { padding: var(--spacing-sm); }
+        .action-buttons { gap: var(--spacing-sm); }
+        .game-grid { gap: var(--spacing-sm); }
     }
 
-    /* ================================
-       ADSENSE ZONE
-       ================================ */
     .ad-container {
         background: var(--dark-color);
         padding: var(--spacing-lg);
@@ -785,7 +644,6 @@
     .adsense-zone {
         width: 100%;
         min-height: 250px;
-        background: #f0f0f0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -793,9 +651,6 @@
         margin: var(--spacing-sm) 0;
     }
 
-    /* ================================
-       DEPOSIT INFO
-       ================================ */
     .deposit-info {
         background: #e7f3ff;
         border: 2px solid #2196F3;
@@ -851,42 +706,21 @@
         box-shadow: var(--shadow-md);
     }
 
-    /* ================================
-       SCROLLBAR CUSTOM
-       ================================ */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--secondary-color);
-    }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--secondary-color); }
 </style>
 ```
 
 </head>
 <body>
-    <!-- ================================
-         ÉCRAN DE CHARGEMENT
-         ================================ -->
     <div id="loadingScreen" class="loading">
         <div class="loading-spinner"></div>
         <div class="loading-text">Chargement d'AfriCash...</div>
     </div>
 
 ```
-<!-- ================================
-     HEADER
-     ================================ -->
 <div id="header" class="header" style="display: none;">
     <div class="user-badge">
         <div class="user-avatar">👤</div>
@@ -900,13 +734,10 @@
     </div>
 </div>
 
-<!-- ================================
-     DASHBOARD
-     ================================ -->
 <div id="dashboard" class="dashboard" style="display: none;">
     <div class="welcome-card">
-        <div class="welcome-text" id="platformName">Bienvenue sur AfriCash</div>
-        <div class="welcome-text" id="platformSlogan">commencer à gagner de l'argent dès aujourd'hui</div>
+        <div class="welcome-text">Bienvenue sur AfriCash</div>
+        <div class="welcome-text">commencer à gagner de l'argent dès aujourd'hui</div>
         
         <div class="balance-container">
             <div class="balance-label">solde : <span id="balanceAmount">0,00</span> FCFA</div>
@@ -971,11 +802,9 @@
     </div>
 </div>
 
-<!-- ================================
-     MENU SIDEBAR
-     ================================ -->
 <div id="menuSidebar" class="menu-sidebar">
     <div class="menu-header">Menu</div>
+    <div class="menu-item" onclick="window.open('https://afri-cash-money.blogspot.com/?m=1', '_blank')">📰 Marketplace</div>
     <div class="menu-item" onclick="alert('Newsletter')">📧 Newsletter</div>
     <div class="menu-item" onclick="alert('S\'abonner')">🔔 S'abonner</div>
     <div class="menu-item" onclick="alert('Conditions')">📋 Conditions d'utilisation</div>
@@ -985,14 +814,11 @@
     <div class="menu-item" onclick="logout()">🚪 Déconnexion</div>
 </div>
 
-<!-- ================================
-     FLUX 1: INSCRIPTION / CONNEXION
-     ================================ -->
 <div id="fluxInscription" class="flux-overlay active">
     <div class="flux-content">
         <button class="flux-close" onclick="closeFlux('fluxInscription')" style="display: none;">✕</button>
         <div class="flux-header">FLUX 1</div>
-        <div class="flux-title">Bienvenue sur <span id="platformNameFlux1">AfriCash</span><br><span id="platformSloganFlux1">commencer à gagner de l'argent dès aujourd'hui</span></div>
+        <div class="flux-title">Bienvenue sur AfriCash<br>commencer à gagner de l'argent dès aujourd'hui</div>
         
         <div style="background: var(--accent-color); padding: 15px; border-radius: 15px; text-align: center; margin: 20px 0;">
             <div style="font-weight: bold; color: #000;">solde : 0,00 FCFA</div>
@@ -1020,7 +846,7 @@
 
             <div class="form-group">
                 <label class="form-label">Numéro de Téléphone :</label>
-                <input type="tel" class="form-input" id="numeroInscrit" required placeholder="+226 XX XX XX XX">
+                <input type="tel" class="form-input" id="numeroInscrit" required placeholder="+XXX XX-XXX-XX-XX">
                 <div class="validation-message" id="numeroError">Numéro invalide</div>
             </div>
 
@@ -1040,7 +866,7 @@
 
             <div class="form-group">
                 <label class="form-label">Numéro de Téléphone :</label>
-                <input type="tel" class="form-input" id="numeroConnexion" required placeholder="+226 XX XX XX XX">
+                <input type="tel" class="form-input" id="numeroConnexion" required placeholder="+XXX XX-XXX-XX-XX">
             </div>
 
             <button type="submit" class="submit-btn">Se connecter</button>
@@ -1056,14 +882,11 @@
     </div>
 </div>
 
-<!-- ================================
-     FLUX 2: INVITATION
-     ================================ -->
 <div id="fluxInvite" class="flux-overlay">
     <div class="flux-content">
         <button class="flux-close" onclick="closeFlux('fluxInvite')">✕</button>
         <div class="flux-header">FLUX 2</div>
-        <div class="flux-title">Invité & Gagnez <span id="referralBonusDisplay">2000</span> FCFA<br>par personne inscrite qui active son compte</div>
+        <div class="flux-title">Invité & Gagnez 2000 FCFA<br>par personne inscrite qui active son compte</div>
         
         <div class="info-box">
             <span class="warning-icon">ℹ️</span>
@@ -1071,7 +894,7 @@
                 <strong>Comment ça marche :</strong><br>
                 1. Copiez votre lien de parrainage<br>
                 2. Partagez-le sur WhatsApp, Facebook, etc.<br>
-                3. Recevez <span id="referralBonusDisplay2">2000</span> FCFA quand votre filleul active son compte
+                3. Recevez 2000 FCFA quand votre filleul active son compte
             </div>
         </div>
         
@@ -1085,9 +908,6 @@
     </div>
 </div>
 
-<!-- ================================
-     FLUX 3: RETRAIT
-     ================================ -->
 <div id="fluxRetrait" class="flux-overlay">
     <div class="flux-content">
         <button class="flux-close" onclick="closeFlux('fluxRetrait')">✕</button>
@@ -1098,7 +918,7 @@
             <span class="warning-icon">💰</span>
             <div class="info-box-text">
                 <strong>Votre solde disponible :</strong> <span id="soldeDisponible">0 FCFA</span><br>
-                <strong>Minimum de retrait :</strong> <span id="minWithdrawalDisplay">5000</span> FCFA
+                <strong>Minimum de retrait :</strong> 5000 FCFA
             </div>
         </div>
         
@@ -1111,7 +931,7 @@
 
             <div class="form-group">
                 <label class="form-label">Numéro de Téléphone :</label>
-                <input type="tel" class="form-input" id="numeroRetrait" required placeholder="+226 XX XX XX XX">
+                <input type="tel" class="form-input" id="numeroRetrait" required placeholder="+XXX XX-XXX-XX-XX">
                 <div class="validation-message" id="numeroRetraitError">Numéro requis</div>
             </div>
 
@@ -1138,9 +958,6 @@
     </div>
 </div>
 
-<!-- ================================
-     FLUX 4: DÉPÔT / ACTIVATION
-     ================================ -->
 <div id="fluxDepot" class="flux-overlay">
     <div class="flux-content">
         <button class="flux-close" onclick="closeFlux('fluxDepot')">✕</button>
@@ -1149,16 +966,16 @@
         
         <div class="deposit-info">
             <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">💳 Frais d'activation unique</div>
-            <div class="deposit-amount"><span id="depositAmountDisplay">4000</span> FCFA</div>
+            <div class="deposit-amount">4000 FCFA</div>
             <div style="font-weight: bold; margin-top: 15px; text-align: center;">📱 Envoyer via Mobile Money à :</div>
-            <div class="deposit-number" id="adminPhoneNumber">+226 XX XX XX XX</div>
+            <div class="deposit-number">+242 06-710-09-40</div>
         </div>
 
         <div class="info-box">
             <span class="warning-icon">ℹ️</span>
             <div class="info-box-text">
                 <strong>Instructions :</strong><br>
-                1. Envoyez exactement <span id="depositAmountDisplay2">4000</span> FCFA au numéro ci-dessus<br>
+                1. Envoyez exactement 4000 FCFA au numéro ci-dessus<br>
                 2. Attendez quelques instants<br>
                 3. Vous recevrez un SMS avec un lien d'activation<br>
                 4. Cliquez sur le lien pour activer votre compte<br>
@@ -1175,9 +992,6 @@
     </div>
 </div>
 
-<!-- ================================
-     FLUX 5: PUBLICITÉ
-     ================================ -->
 <div id="fluxPub" class="flux-overlay">
     <div class="flux-content">
         <button class="flux-close" onclick="cancelAdViewing()" style="background: var(--warning-color);">✕</button>
@@ -1187,74 +1001,51 @@
             <div class="ad-timer" id="adTimer">30</div>
             <div class="ad-text">Publicité en cours...</div>
             
-            <!-- ZONE GOOGLE ADSENSE -->
             <div class="adsense-zone" id="adSenseContainer">
-                <!-- COLLEZ VOTRE CODE ADSENSE ICI -->
-                <div style="color: #999; padding: 20px; text-align: center;">
-                    📺 Zone de publicité<br>
-                    <small>Code AdSense sera ajouté ici</small>
-                </div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-6t+ed+2i-1n-4w"
+                     data-ad-client="ca-pub-9207683457415697"
+                     data-ad-slot="1234567890"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </div>
 
         <div class="footer-note" style="margin-top: 20px;">
-            ⏱️ Regardez la publicité jusqu'à la fin pour recevoir votre récompense de <strong><span id="earningsDisplay">50</span> FCFA</strong>
+            ⏱️ Regardez la publicité jusqu'à la fin pour recevoir votre récompense de <strong>0,03 FCFA</strong>
         </div>
     </div>
 </div>
 
-<!-- ================================
-     JAVASCRIPT
-     ================================ -->
 <script>
-    // ============================================
-    // CONFIGURATION AUTOMATIQUE
-    // ============================================
     const CONFIG = {
-        // Ces valeurs seront remplacées automatiquement
-        ADMIN_EMAIL: "votre-email@example.com",
-        ADMIN_PHONE: "+226 XX XX XX XX",
-        SHOP_LINK: "https://votre-boutique.com",
-        PLATFORM_NAME: "AfriCash",
-        PLATFORM_SLOGAN: "commencer à gagner de l'argent dès aujourd'hui",
-        
-        // Paramètres financiers
-        EARNINGS_PER_AD: 50,
+        ADMIN_EMAIL: "mcommunity638@gmail.com",
+        ADMIN_PHONE: "+242 06-710-09-40",
+        SHOP_LINK: "https://ziwtsubn.mychariow.shop/",
+        MARKETPLACE_LINK: "https://afri-cash-money.blogspot.com/?m=1",
+        EARNINGS_PER_AD: 0.03,
         AD_DURATION: 30,
         DEPOSIT_REQUIRED: 4000,
         MIN_WITHDRAWAL: 5000,
         REFERRAL_BONUS: 2000,
-        
-        // Intégrations
-        GOOGLE_SCRIPT_URL: "",
-        TELEGRAM_BOT_TOKEN: "",
-        TELEGRAM_CHAT_ID: "",
-        ADSENSE_CODE: "",
-        
-        // Couleurs (optionnel)
-        PRIMARY_COLOR: "#667eea",
-        SECONDARY_COLOR: "#764ba2",
-        ACCENT_COLOR: "#FFE4B5"
+        GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzOTi7O7RtswBw4E8cCtRfoavcO560CgrXyZ_cTVJbHq-WRTLDbx2xCDjmTee-NlxaA/exec",
+        TELEGRAM_BOT_TOKEN: "8202409992:AAFVP4lA_YCPZpecqVZ932k3rhAArCDuI54",
+        TELEGRAM_CHAT_ID: "8036274057"
     };
 
-    // ============================================
-    // APPLICATION
-    // ============================================
     let currentUser = null;
     let adTimer = null;
     let authMode = 'inscription';
 
-    // Initialisation
     document.addEventListener('DOMContentLoaded', async () => {
         await initApp();
     });
 
     async function initApp() {
         try {
-            // Appliquer la configuration
-            applyConfiguration();
-            
-            // Vérifier code parrain
             const urlParams = new URLSearchParams(window.location.search);
             const referralCode = urlParams.get('invité') || urlParams.get('invite') || urlParams.get('ref');
             
@@ -1262,10 +1053,8 @@
                 document.getElementById('codeParrain').value = referralCode;
             }
 
-            // Vérifier activation
             await activateFromLink();
 
-            // Vérifier connexion
             const userId = localStorage.getItem('africash_user_id');
             
             if (userId) {
@@ -1283,42 +1072,6 @@
             showInscriptionFlux();
         } finally {
             document.getElementById('loadingScreen').style.display = 'none';
-        }
-    }
-
-    function applyConfiguration() {
-        // Nom de la plateforme
-        document.getElementById('platformName').textContent = `Bienvenue sur ${CONFIG.PLATFORM_NAME}`;
-        document.getElementById('platformSlogan').textContent = CONFIG.PLATFORM_SLOGAN;
-        document.getElementById('platformNameFlux1').textContent = CONFIG.PLATFORM_NAME;
-        document.getElementById('platformSloganFlux1').textContent = CONFIG.PLATFORM_SLOGAN;
-        document.title = `${CONFIG.PLATFORM_NAME} - Gagnez de l'argent en ligne`;
-        
-        // Numéro admin
-        document.getElementById('adminPhoneNumber').textContent = CONFIG.ADMIN_PHONE;
-        
-        // Montants
-        document.getElementById('referralBonusDisplay').textContent = CONFIG.REFERRAL_BONUS;
-        document.getElementById('referralBonusDisplay2').textContent = CONFIG.REFERRAL_BONUS;
-        document.getElementById('minWithdrawalDisplay').textContent = CONFIG.MIN_WITHDRAWAL;
-        document.getElementById('depositAmountDisplay').textContent = CONFIG.DEPOSIT_REQUIRED;
-        document.getElementById('depositAmountDisplay2').textContent = CONFIG.DEPOSIT_REQUIRED;
-        document.getElementById('earningsDisplay').textContent = CONFIG.EARNINGS_PER_AD;
-        
-        // AdSense (si fourni)
-        if (CONFIG.ADSENSE_CODE) {
-            document.getElementById('adSenseContainer').innerHTML = CONFIG.ADSENSE_CODE;
-        }
-        
-        // Couleurs (si fournies)
-        if (CONFIG.PRIMARY_COLOR !== "#667eea") {
-            document.documentElement.style.setProperty('--primary-color', CONFIG.PRIMARY_COLOR);
-        }
-        if (CONFIG.SECONDARY_COLOR !== "#764ba2") {
-            document.documentElement.style.setProperty('--secondary-color', CONFIG.SECONDARY_COLOR);
-        }
-        if (CONFIG.ACCENT_COLOR !== "#FFE4B5") {
-            document.documentElement.style.setProperty('--accent-color', CONFIG.ACCENT_COLOR);
         }
     }
 
@@ -1383,7 +1136,6 @@
         }
     }
 
-    // Inscription
     document.getElementById('inscriptionForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -1436,11 +1188,10 @@
         showCelebration('🎉');
         
         setTimeout(() => {
-            alert('Bienvenue sur ' + CONFIG.PLATFORM_NAME + ' ! Pour commencer à gagner, activez votre compte avec un dépôt de ' + CONFIG.DEPOSIT_REQUIRED + ' FCFA.');
+            alert('Bienvenue sur AfriCash ! Pour commencer à gagner, activez votre compte avec un dépôt de 4000 FCFA.');
         }, 1000);
     });
 
-    // Connexion
     document.getElementById('connexionForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -1465,7 +1216,6 @@
         }
     });
 
-    // Retrait
     document.getElementById('retraitForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -1511,11 +1261,7 @@
     });
 
     function openShop() {
-        if (CONFIG.SHOP_LINK && CONFIG.SHOP_LINK !== "https://votre-boutique.com") {
-            window.open(CONFIG.SHOP_LINK, '_blank');
-        } else {
-            alert('Boutique disponible bientôt !');
-        }
+        window.open(CONFIG.SHOP_LINK, '_blank');
     }
 
     function openInvite() {
@@ -1572,7 +1318,7 @@
         playSound();
         
         setTimeout(() => {
-            alert(`🎉 Félicitations !\n\n+${CONFIG.EARNINGS_PER_AD} FCFA ajoutés à votre solde !\n\nNouveau solde : ${currentUser.solde.toFixed(2)} FCFA`);
+            alert(`🎉 Félicitations !\n\n+${CONFIG.EARNINGS_PER_AD.toFixed(2)} FCFA ajoutés à votre solde !\n\nNouveau solde : ${currentUser.solde.toFixed(2)} FCFA`);
         }, 500);
     }
 
@@ -1774,6 +1520,7 @@
             try {
                 await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
                     method: 'POST',
+                    headers: {'Content-Type': 'text/plain'},
                     body: JSON.stringify({ type, ...data })
                 });
             } catch (e) {
@@ -1784,7 +1531,7 @@
         // Telegram
         if (CONFIG.TELEGRAM_BOT_TOKEN && CONFIG.TELEGRAM_CHAT_ID) {
             try {
-                let message = `🔔 *${CONFIG.PLATFORM_NAME} - ${type}*\n\n`;
+                let message = `🔔 *AfriCash - ${type}*\n\n`;
                 message += `👤 ${data.nom}\n`;
                 message += `📧 ${data.email}\n`;
                 message += `📞 ${data.numero}\n`;
@@ -1794,6 +1541,11 @@
                     message += `\n💵 *RETRAIT*\n`;
                     message += `Montant: ${data.montantRetrait} FCFA\n`;
                     message += `Vers: ${data.numeroRetrait}\n`;
+                }
+                
+                if (type === 'inscription') {
+                    message += `\n🔗 Lien activation:\n`;
+                    message += `${window.location.origin}${window.location.pathname}?activate=${data.id}`;
                 }
                 
                 await fetch(`https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -1862,7 +1614,7 @@
                     const result = await window.storage.get(key);
                     if (result && result.value) {
                         const user = JSON.parse(result.value);
-                        if (user.id === activationCode || user.referralCode === activationCode) {
+                        if (user.id === activationCode) {
                             await activateUserAccount(user.id);
                             alert('🎉 Votre compte a été activé avec succès !\n\nVous pouvez maintenant commencer à gagner de l\'argent !');
                             
@@ -1879,7 +1631,6 @@
         }
     }
 
-    // Fermer menu en cliquant dehors
     document.addEventListener('click', (e) => {
         const menu = document.getElementById('menuSidebar');
         const menuIcon = document.querySelector('.menu-icon');
@@ -1891,7 +1642,6 @@
         }
     });
 
-    // Empêcher fermeture flux en cliquant contenu
     document.querySelectorAll('.flux-content').forEach(content => {
         content.addEventListener('click', (e) => {
             e.stopPropagation();
